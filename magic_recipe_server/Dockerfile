@@ -33,9 +33,6 @@ COPY --from=build /app/migrations/ migrations/
 # This file is required to enable the endpoint log filter in Insights.
 COPY --from=build /app/lib/src/generated/protocol.yaml lib/src/generated/protocol.yaml
 
-RUN useradd -m -u 1000 serverpod
-USER serverpod
-
 # Expose ports
 EXPOSE 8080
 EXPOSE 8081
