@@ -8,7 +8,6 @@ RUN dart pub get
 
 COPY . .
 
-RUN dart run serverpod_cli:main generate
 RUN dart compile exe bin/main.dart -o bin/server
 
 # Final stage
@@ -34,10 +33,15 @@ COPY --from=build /app/migrations/ migrations/
 # This file is required to enable the endpoint log filter in Insights.
 COPY --from=build /app/lib/src/generated/protocol.yaml lib/src/generated/protocol.yaml
 
+RUN useradd -m -u 1000 serverpod
+USER serverpod
+
 # Expose ports
 EXPOSE 8080
 EXPOSE 8081
 EXPOSE 8082
+
+ENV SERVERPOD_MODE=production
 
 # Define the entrypoint command
 ENTRYPOINT ./server --mode=$runmode --server-id=$serverid --logging=$logging --role=$role
