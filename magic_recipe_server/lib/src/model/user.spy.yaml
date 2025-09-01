@@ -1,0 +1,6 @@
+class: User
+table: user
+fields:
+    name: String
+    email: String
+    photoUrl: String?

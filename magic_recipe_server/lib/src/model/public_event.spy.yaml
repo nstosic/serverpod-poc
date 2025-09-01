@@ -1,0 +1,8 @@
+class: PublicEvent
+table: public_event
+fields:
+    name: String
+    photoUrl: String?
+    startDate: DateTime
+    endDate: DateTime
+    attendees: List<User>

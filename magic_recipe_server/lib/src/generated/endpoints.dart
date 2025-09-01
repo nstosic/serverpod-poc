@@ -11,19 +11,41 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../greeting_endpoint.dart' as _i2;
+import '../events/events_endpoint.dart' as _i2;
+import '../greeting_endpoint.dart' as _i3;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
   void initializeEndpoints(_i1.Server server) {
     var endpoints = <String, _i1.Endpoint>{
-      'greeting': _i2.GreetingEndpoint()
+      'events': _i2.EventsEndpoint()
+        ..initialize(
+          server,
+          'events',
+          null,
+        ),
+      'greeting': _i3.GreetingEndpoint()
         ..initialize(
           server,
           'greeting',
           null,
-        )
+        ),
     };
+    connectors['events'] = _i1.EndpointConnector(
+      name: 'events',
+      endpoint: endpoints['events']!,
+      methodConnectors: {
+        'getEvents': _i1.MethodConnector(
+          name: 'getEvents',
+          params: {},
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['events'] as _i2.EventsEndpoint).getEvents(session),
+        )
+      },
+    );
     connectors['greeting'] = _i1.EndpointConnector(
       name: 'greeting',
       endpoint: endpoints['greeting']!,
@@ -41,7 +63,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['greeting'] as _i2.GreetingEndpoint).hello(
+              (endpoints['greeting'] as _i3.GreetingEndpoint).hello(
             session,
             params['name'],
           ),

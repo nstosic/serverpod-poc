@@ -2,8 +2,8 @@
 
 # These are the variables that need to be set to be able to deploy to cloud run.
 # You can find the values in the Google Cloud Console.
-DATABASE_INSTANCE_CONNECTION_NAME="<DATABASE CONNECTION NAME>"
-SERVICE_ACCOUNT="<SERVICE ACCOUNT EMAIL>"
+DATABASE_INSTANCE_CONNECTION_NAME="flutterconf-latam-staging:us-central1:serverpod-postgres"
+SERVICE_ACCOUNT="serverpod-cloudrun@flutterconf-latam-staging.iam.gserviceaccount.com"
 
 # Optionally configure the region and runmode (staging is also viable).
 REGION="us-central1"
