@@ -1,10 +1,14 @@
 # Build stage
-FROM dart:3.5.0 AS build
+FROM dart:stable AS build
 WORKDIR /app
-COPY . .
+COPY pubspec.* ./
 
 # Install dependencies and compile the server executable
 RUN dart pub get
+
+COPY . .
+
+RUN dart run serverpod_cli:main generate
 RUN dart compile exe bin/main.dart -o bin/server
 
 # Final stage

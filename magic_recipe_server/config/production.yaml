@@ -31,7 +31,7 @@ webServer:
 # connect on the public IP of the database e.g. database.examplepod.com.
 database:
   isUnixSocket: true
-  host: /cloudsql/flutterconf-latam-staging:us-central1:serverpod-postgres/.s.PGSQL.5432
+  host: /cloudsql/flutterconf-latam-staging:us-central1:serverpod-postgres
   port: 5432
   name: serverpod
   user: postgres
